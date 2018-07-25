@@ -48,8 +48,25 @@
         </swiper>
       </div>
     </div>
-        <swiper-default1></swiper-default1>
-    <swiper-default></swiper-default>
+<!--floor one area-->
+<div class="floor">
+    <div class="floor-anomaly">
+        <div class="floor-one"><img :src="floor1_0.image" width="100%" /></div>
+        <div>
+            <div class="floor-two"><img :src="floor1_1.image" width="100%" /></div>
+            <div><img :src="floor1_2.image" width="100%" /></div>
+        </div>
+    </div>
+    <div class="floor-rule">
+    <div v-for="(item ,index) in floor1.slice(3)" :key="index">
+        <img :src="item.image" width="100%"/>
+    </div>
+</div>
+</div>
+
+ 
+        <!-- <swiper-default1></swiper-default1>
+    <swiper-default></swiper-default> -->
 
   </div>
 </template>
@@ -58,20 +75,25 @@
 import Axios from "axios"
 import {swiper, swiperSlide} from 'vue-awesome-swiper' // 轮播组件 局部引入
 import 'swiper/dist/css/swiper.css'
-import swiperDefault from "../swiper/swiperDefault.vue"
-import swiperDefault1 from "../swiper/swiperDefault1.vue"
+// import swiperDefault from "../swiper/swiperDefault.vue"
+// import swiperDefault1 from "../swiper/swiperDefault1.vue"
 export default {
   data () {
     return {
        list: [],
        swiperOption:{
          slidesPerView: 3
-       }
+       },
+       floor1:{},
+       floor1_0:{},
+       floor1_1:{},
+       floor1_2:{},
     };
   },
 
   components: {
-    swiper,swiperSlide,swiperDefault,swiperDefault1
+    swiper,swiperSlide
+    // ,swiperDefault,swiperDefault1
   },
 
   computed: {},
@@ -86,7 +108,10 @@ export default {
     .then( res => {
       if(res.status == 200){
           this.list = res.data.data;
-          console.log(this.list)
+          this.floor1 = res.data.data.floor1              //楼层1数据
+          this.floor1_0 =this.floor1[0]
+          this.floor1_1 =this.floor1[1]
+          this.floor1_2 =this.floor1[2]
       }     
     })
     .catch( err => {
@@ -152,4 +177,37 @@ export default {
   font-size: 12px;
   text-align: center;
 }
+.floor-anomaly{
+      display: flex;
+      flex-direction:row;
+      background-color: #fff;
+      border-bottom:1px solid #ddd;
+  }
+  .floor-anomaly div{
+     width:10rem;
+     box-sizing: border-box;
+     -webkit-box-sizing: border-box;
+  }
+  .floor-one{
+      border-right:1px solid #ddd;
+  }
+  .floor-two{
+      border-bottom:1px solid #ddd;
+  }
+ .floor-rule{
+      display: flex;
+      flex-direction: row;
+      flex-wrap:wrap;
+      background-color: #fff;
+ 
+  }
+  .floor-rule div{
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      width:10rem;
+      border-bottom:1px solid #ddd;
+  }
+  .floor-rule div:nth-child(odd){
+      border-right:1px solid #ddd;
+  }
 </style>
