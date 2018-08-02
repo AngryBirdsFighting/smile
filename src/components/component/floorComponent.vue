@@ -2,7 +2,7 @@
     <div>
         <!--floor one area-->
         <div class="floor">
-            <!-- <div class="floor-title"> {{floorTitle}} </div> -->
+            <div class="floor-title"> {{floorTitle}} </div>
             <div class="floor-anomaly">
                 <div class="floor-one"><img :src="floorData0.image" width="100%" /></div>
                 <div>
@@ -23,7 +23,7 @@
  
 <script>
     export default {
-       
+        
         data() {
             return {
                 floorData0:{},
@@ -31,7 +31,7 @@
                 floorData2:{}
             }
         },
-        props:['floorData'],
+        props:['floorData','floorTitle'],
         created(){
             //这里写得不到数据，应为数据是延迟返回的
             
