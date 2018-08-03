@@ -82,7 +82,8 @@ export default {
                     if (response.status == 200) {
                         if (response.data.success) {
                             vm.$toast.success(response.data.message);
-                             vm.openLoading = false;
+                            vm.$router.push({ path: '/login' })
+                            vm.openLoading = false;
                         } else {
                             vm.$toast.fail(response.data.message);
                             vm.openLoading = false;
