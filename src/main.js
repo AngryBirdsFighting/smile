@@ -6,12 +6,16 @@ import router from './router'
 // import Vant from 'vant'
 // import 'vant/lib/vant-css/index.css'
 // Vue.use(Vant) // 全局引入  不提倡
-import {Button, Row, Col, Swipe, SwipeItem, Lazyload, List} from 'vant' // 按需引入
-import '@/assets/icon/iconfont.css'
 // import vueAwesomeSwiper from 'vue-awesome-swiper'
 // import 'swiper/dist/css/swiper.css'
 
-Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(Lazyload).use(List) //.use(vueAwesomeSwiper)
+import {Button, Row, Col, Swipe, SwipeItem, Lazyload, List, Field, NavBar , Toast} from 'vant' // 按需引入
+import '@/assets/icon/iconfont.css'
+import instance from './util/http.js'
+
+
+Vue.prototype.$axios = instance;
+Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(Lazyload).use(List).use(NavBar).use(Field).use(Toast) //.use(vueAwesomeSwiper)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
