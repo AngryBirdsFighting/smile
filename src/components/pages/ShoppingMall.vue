@@ -56,7 +56,7 @@
       <div class="hot-title">热卖商品</div>
       <van-row gutter="20">
         <van-col span="12" v-for="(item,index) in hotGoods" :key="index">
-          <goods-info :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price"></goods-info>
+          <goods-info :goodsImage="item.image" :goodsId="item.goodsId" :goodsName="item.name" :goodsPrice="item.price"></goods-info>
         </van-col>
       </van-row>
     </div>
