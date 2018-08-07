@@ -22,6 +22,7 @@ export default {
     },
     methods:{
         goGoodsPage() {
+            // query传参，用的是path，而不是name,否则也会出错。
                 this.$router.push({name:'Goods',query:{goodsId:this.goodsId}})
             }
     }
