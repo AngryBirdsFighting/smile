@@ -36,7 +36,7 @@
 <!--显示总金额-->
 <div class="totalMoney">
  
-    商品总价：￥ {{allMoney | moneyFilter}}
+    商品总价：￥ {{total | moneyFilter}}
  
 </div>
  
@@ -57,7 +57,7 @@ import { toMoney } from "@/filter/filter.js";
       ...mapState({
           cartList: state => state.shopCart.cartList
         }),
-      ...mapGetters('shopCart', ['allMoney'])
+      ...mapGetters('shopCart', {total:'allMoney'})
    },
    components: {
 

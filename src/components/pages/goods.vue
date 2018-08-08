@@ -50,8 +50,7 @@ export default {
   computed:{
     ...mapState({
         cartList: state => state.shopCart.cartList
-    }),
-    ...mapGetters('shopCart', ['setGoods',])
+    })
   },
   created() {
     this.goodsId= this.$route.query.goodsId ? this.$route.query.goodsId:this.$route.params.goodsId

@@ -2,8 +2,8 @@ const state = {
     cartList:[]
 }
 const getters = {
-    allMoney(state){
-        debugger;
+    allMoney: (state, getters, rootState) =>{
+        debugger
         let a = 0
         state.cartList.forEach(item => {
             a += (item.count * item.price)
