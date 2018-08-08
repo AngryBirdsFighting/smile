@@ -27,7 +27,7 @@
 <div class="goods-bottom">
     
     <div>
-            <van-button size="large" type="primary">加入购物车</van-button>
+            <van-button size="large" type="primary" @click="addGoodsToCart">加入购物车</van-button>
     </div>
     <div>
             <van-button size="large" type="danger">直接购买</van-button>
@@ -39,12 +39,18 @@
  
 <script>
 import { toMoney } from "@/filter/filter.js";
+import {mapActions, mapState} from 'vuex'
 export default {
   data() {
     return {
       goodsId: "",
       goodsInfo: {} //商品详细数据
     };
+  },
+  computed:{
+    ...mapState({
+        cartList: state => state.shopCart.cartList
+    })
   },
   created() {
     this.goodsId= this.$route.query.goodsId ? this.$route.query.goodsId:this.$route.params.goodsId
@@ -56,6 +62,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('shopCart', ['setGoods']),
     onClickLeft() {
       this.$router.go(-1);
     },
@@ -80,6 +87,22 @@ export default {
         .catch(error => {
           vm.$toast.fail("获取详细失败" + error);
         });
+    },
+    addGoodsToCart(){
+        let isHave = this.cartList.find( cart => cart.goodsId == this.goodsId)
+        if(isHave){
+             this.$toast.fail("该商品已存在");
+        }else{
+            let newGoods = {
+              goodsId : this.goodsId,
+              Name:this.goodsInfo.NAME,
+              price:this.goodsInfo.PRESENT_PRICE,
+              image:this.goodsInfo.IMAGE1,
+              count:1
+            }
+            this.setGoods(newGoods)
+        }
+       this.$router.push({name:'Cart'})  //进行跳转
     }
   }
 };
