@@ -2,32 +2,41 @@ const state = {
     cartList:[]
 }
 const getters = {
-    num(state){
-        return carList.length
+    allMoney(state){
+        debugger;
+        let a = 0
+        state.cartList.forEach(item => {
+            a += (item.count * item.price)
+        })
+        return a
     }
 }
 const actions = {
     setGoods({commit}, goods){
-        debugger;
         commit("setGoodsToCartList", goods)
+    },
+    addOrMinusGoods({commit}, {goodsId, add}){
+        commit("addOrMinusCartList", {goodsId, add})
     },
     // 删除购物车商品 如果goodsId不存在 则为清空
     deleteGoods({commit}, goodsId){
         commit("deleteGoodsToCartList", goodsId)
     },
     getGoods({commit}){
-        debugger
         commit("getGoodsToCartList")
     }
 }
 const mutations = {
     setGoodsToCartList(state, goods){
-        debugger
         state.cartList.push(goods)
         localStorage.cart = JSON.stringify(state.cartList)
     },
+    addOrMinusCartList(state,{goodsId, add}){
+        let goods = state.cartList.find( cart => cart.goodsId == goodsId)
+        add? goods.count++ :  goods.count--
+        localStorage.cart = JSON.stringify(state.cartList)
+    },
     deleteGoodsToCartList(state, goodsId){
-        debugger
         if(goodsId){
             state.cartList.push(goods)
         }else{
@@ -37,8 +46,7 @@ const mutations = {
        
     },
     getGoodsToCartList(state){
-        debugger
-        state.cartList = JSON.parse(localStorage.cart) || []
+        Object.assign(state.cartList,JSON.parse(localStorage.cart))
     }
 }
 

@@ -39,7 +39,7 @@
  
 <script>
 import { toMoney } from "@/filter/filter.js";
-import {mapActions, mapState} from 'vuex'
+import {mapActions, mapState, mapGetters} from 'vuex'
 export default {
   data() {
     return {
@@ -50,7 +50,8 @@ export default {
   computed:{
     ...mapState({
         cartList: state => state.shopCart.cartList
-    })
+    }),
+    ...mapGetters('shopCart', ['setGoods',])
   },
   created() {
     this.goodsId= this.$route.query.goodsId ? this.$route.query.goodsId:this.$route.params.goodsId
@@ -62,7 +63,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('shopCart', ['setGoods']),
+    ...mapActions('shopCart', ['setGoods', 'getGoods']),
     onClickLeft() {
       this.$router.go(-1);
     },

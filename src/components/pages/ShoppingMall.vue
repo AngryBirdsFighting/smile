@@ -123,8 +123,7 @@ export default {
             })
             .catch(err => {
                 alert(err);
-            });   
-            debugger;   
+            });     
         vm.getGoods()        
     }
 };
