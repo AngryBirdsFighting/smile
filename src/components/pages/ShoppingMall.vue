@@ -71,6 +71,7 @@ import floorCompoent from "../component/floorComponent.vue";
 import goodsInfo from "@/components/component/goodsInfoComponent.vue";
 import { toMoney } from "@/filter/filter.js";
 import url from '@/serverAPI.config.js'
+import { mapActions } from 'vuex'
 export default {
     data() {
         return {
@@ -96,8 +97,9 @@ export default {
 
     computed: {},
 
-    methods: {},
-
+    methods: {
+         ...mapActions('shopCart', ['getGoods'])
+    },
     filters: {
         moneyFilter(money) {
             return toMoney(money);
@@ -121,7 +123,9 @@ export default {
             })
             .catch(err => {
                 alert(err);
-            });          
+            });   
+            debugger;   
+        vm.getGoods()        
     }
 };
 </script>
