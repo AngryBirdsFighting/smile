@@ -27,10 +27,10 @@
 <div class="goods-bottom">
     
     <div>
-            <van-button size="large" type="primary" @click="addGoodsToCart">加入购物车</van-button>
+       <van-button size="large" type="primary" @click="addGoodsToCart">加入购物车</van-button>
     </div>
     <div>
-            <van-button size="large" type="danger">直接购买</van-button>
+       <van-button size="large" type="danger">直接购买</van-button>
     </div>
     
 </div>

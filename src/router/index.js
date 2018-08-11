@@ -10,6 +10,8 @@ import Cart from '@/components/pages/Cart'
 
 Vue.use(Router)
 
+
+
 export default new Router({
   routes: [
    {path: '/', name: 'ShoppingMall', component: ShoppingMall},
