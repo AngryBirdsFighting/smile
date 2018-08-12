@@ -3,7 +3,6 @@ const state = {
 }
 const getters = {
     allMoney: (state, getters, rootState) =>{
-        debugger
         let a = 0
         state.cartList.forEach(item => {
             a += (item.count * item.price)
@@ -19,12 +18,12 @@ const actions = {
         commit("addOrMinusCartList", {goodsId, add})
     },
     // 删除购物车商品 如果goodsId不存在 则为清空
-    deleteGoods({commit}, goodsId){
-        commit("deleteGoodsToCartList", goodsId)
-    },
-    getGoods({commit}){
-        commit("getGoodsToCartList")
-    }
+    // deleteGoods({commit}, goodsId){
+    //     commit("deleteGoodsToCartList", goodsId)
+    // },
+    // getGoods({commit}){
+    //     commit("getGoodsToCartList")
+    // }
 }
 const mutations = {
     setGoodsToCartList(state, goods){
@@ -42,8 +41,7 @@ const mutations = {
         }else{
             localStorage.removeItem("cart")
             state.cartList = []
-        }
-       
+        }      
     },
     getGoodsToCartList(state){
         Object.assign(state.cartList,JSON.parse(localStorage.cart))
