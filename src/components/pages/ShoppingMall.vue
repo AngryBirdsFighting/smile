@@ -1,66 +1,70 @@
 <!--  -->
 <template>
-  <div class=''>
-    <div class="search-bar">
-      <van-row>
-        <van-col class="icon-s-place" span="3"></van-col>
-        <van-col span="16">
-          <input class="search-input" type="text">
-        </van-col>
-        <van-col span="5">
-          <van-button size="mini"> 查找</van-button>
-        </van-col>
-      </van-row>
-    </div>
-    <!-- 轮播组件 -->
-    <div class="swipe" v-if="list.slides">
-      <van-swipe :autoplay="3000">
-        <van-swipe-item v-for="(image, index) in list.slides" :key="index">
-          <img width="100%" v-lazy="image.image" />
-        </van-swipe-item>
-      </van-swipe>
-    </div>
-    <!-- type bar -->
-    <div class="type-bar" v-if="list.category">
-      <div v-for="(cate, index) in list.category" :key="index">
-        <img v-lazy="cate.image" alt="" width="90%">
-        <span>{{cate.mallCategoryName}}</span>
-      </div>
-    </div>
-    <!-- add -->
-    <div v-if="list.advertesPicture">
-      <img width="100%" v-lazy="list.advertesPicture.PICTURE_ADDRESS" alt="">
-    </div>
-    <!-- goods -->
-    <div class="recommend" v-if="list.recommend">
-      <div class="recommend-title">
-        商品推荐
-      </div>
-      <div class="recommend-body">
-        <swiper :options="swiperOption">
-          <swiper-slide v-for="(item, index) in list.recommend" :key="index">
-            <div class="recommend-item">
-              <img v-lazy="item.image" width="80%" alt="">
-              <div>{{item.goodsName}}</div>
-              <div>${{item.price | moneyFilter}}(${{item.mallPrice | moneyFilter}})</div>
+    <div class=''>
+        <div class="search-bar">
+            <van-row>
+                <van-col class="icon-s-place" span="3"></van-col>
+                <van-col span="16">
+                    <input class="search-input" type="text">
+                </van-col>
+                <van-col span="5">
+                    <van-button size="mini"> 查找</van-button>
+                </van-col>
+            </van-row>
+        </div>
+        <!-- 轮播组件 -->
+        <div class="swipe" v-if="list.slides">
+            <van-swipe :autoplay="3000">
+                <van-swipe-item v-for="(image, index) in list.slides" :key="index">
+                    <img width="100%" v-lazy="image.image" />
+                </van-swipe-item>
+            </van-swipe>
+        </div>
+        <!-- type bar -->
+        <div class="type-bar" v-if="list.category">
+            <div v-for="(cate, index) in list.category" :key="index">
+                <img v-lazy="cate.image" alt="" width="90%">
+                <span>{{cate.mallCategoryName}}</span>
             </div>
-          </swiper-slide>
-        </swiper>
-      </div>
+        </div>
+        <!-- add -->
+        <div v-if="list.advertesPicture">
+            <img width="100%" v-lazy="list.advertesPicture.PICTURE_ADDRESS" alt="">
+        </div>
+        <!-- goods -->
+        <div class="recommend" v-if="list.recommend">
+            <div class="recommend-title">
+                商品推荐
+            </div>
+            <div class="recommend-body">
+                <swiper :options="swiperOption">
+                    <swiper-slide v-for="(item, index) in list.recommend" :key="index">
+                        <div class="recommend-item">
+                            <img v-lazy="item.image" width="80%" alt="">
+                            <div>{{item.goodsName}}</div>
+                            <div>${{item.price | moneyFilter}}(${{item.mallPrice | moneyFilter}})</div>
+                        </div>
+                    </swiper-slide>
+                </swiper>
+            </div>
+        </div>
+        <!--floor one area-->
+        <floor-compoent :floorData="floor1" :floorTitle="floorName.floor1"></floor-compoent>
+        <floor-compoent :floorData="floor2" :floorTitle="floorName.floor2"></floor-compoent>
+        <floor-compoent :floorData="floor3" :floorTitle="floorName.floor3"></floor-compoent>
+        <div class="hot-area">
+            <div class="hot-title">热卖商品</div>
+            <div class="hot-goods">
+                <van-list>
+                    <van-row gutter="20">
+                        <van-col span="12" v-for="(item,index) in hotGoods" :key="index">
+                            <goods-info :goodsImage="item.image" :goodsId="item.goodsId" :goodsName="item.name" :goodsPrice="item.price"></goods-info>
+                        </van-col>
+                    </van-row>
+                </van-list>
+            </div>
+        </div>
     </div>
-    <!--floor one area-->
-    <floor-compoent :floorData="floor1" :floorTitle="floorName.floor1"></floor-compoent>
-    <floor-compoent :floorData="floor2" :floorTitle="floorName.floor2"></floor-compoent>
-    <floor-compoent :floorData="floor3" :floorTitle="floorName.floor3"></floor-compoent>
-    <div class="hot-area">
-      <div class="hot-title">热卖商品</div>
-      <van-row gutter="20">
-        <van-col span="12" v-for="(item,index) in hotGoods" :key="index">
-          <goods-info :goodsImage="item.image" :goodsId="item.goodsId" :goodsName="item.name" :goodsPrice="item.price"></goods-info>
-        </van-col>
-      </van-row>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -70,8 +74,8 @@ import "swiper/dist/css/swiper.css";
 import floorCompoent from "../component/floorComponent.vue";
 import goodsInfo from "@/components/component/goodsInfoComponent.vue";
 import { toMoney } from "@/filter/filter.js";
-import url from '@/serverAPI.config.js'
-import { mapActions } from 'vuex'
+import url from "@/serverAPI.config.js";
+import { mapActions } from "vuex";
 export default {
     data() {
         return {
@@ -98,7 +102,7 @@ export default {
     computed: {},
 
     methods: {
-         ...mapActions('shopCart', ['getGoods'])
+        ...mapActions("shopCart", ["getGoods"])
     },
     filters: {
         moneyFilter(money) {
@@ -108,10 +112,11 @@ export default {
     created() {
         let vm = this;
         Axios({
-          //  "https://www.easy-mock.com/mock/5b573c0e9a5ff532038078dd/smile/getList",
-            url:url.getGoodsInfo,              
+            //  "https://www.easy-mock.com/mock/5b573c0e9a5ff532038078dd/smile/getList",
+            url: url.getGoodsInfo,
             method: "get"
-        }).then(res => {
+        })
+            .then(res => {
                 if (res.status == 200) {
                     vm.list = res.data.data;
                     vm.floor1 = res.data.data.floor1; //楼层1数据
@@ -123,8 +128,8 @@ export default {
             })
             .catch(err => {
                 alert(err);
-            });     
-        vm.getGoods()        
+            });
+        vm.getGoods();
     }
 };
 </script>
@@ -222,4 +227,11 @@ export default {
     height: 1.8rem;
     line-height: 1.8rem;
 }
+
+.hot-goods{
+    height: 130rem;
+    overflow: hidden;
+    background-color: #fff;
+}
+ 
 </style>

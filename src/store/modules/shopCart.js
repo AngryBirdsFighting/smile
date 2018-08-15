@@ -1,3 +1,4 @@
+import Vue from 'vue'
 const state = {
     cartList:[]
 }
@@ -18,12 +19,12 @@ const actions = {
         commit("addOrMinusCartList", {goodsId, add})
     },
     // 删除购物车商品 如果goodsId不存在 则为清空
-    // deleteGoods({commit}, goodsId){
-    //     commit("deleteGoodsToCartList", goodsId)
-    // },
-    // getGoods({commit}){
-    //     commit("getGoodsToCartList")
-    // }
+    deleteGoods({commit}, goodsId){
+        commit("deleteGoodsToCartList", goodsId)
+    },
+    getGoods({commit}){
+        commit("getGoodsToCartList")
+    }
 }
 const mutations = {
     setGoodsToCartList(state, goods){
@@ -31,8 +32,10 @@ const mutations = {
         localStorage.cart = JSON.stringify(state.cartList)
     },
     addOrMinusCartList(state,{goodsId, add}){
-        let goods = state.cartList.find( cart => cart.goodsId == goodsId)
-        add? goods.count++ :  goods.count--
+        let goodIndex = state.cartList.findIndex( cart => cart.goodsId == goodsId)
+        let newGoods = state.cartList[goodIndex]     
+        add? newGoods.count++ :newGoods.count--
+        Vue.set(state.cartList,goodIndex, newGoods)
         localStorage.cart = JSON.stringify(state.cartList)
     },
     deleteGoodsToCartList(state, goodsId){
@@ -41,10 +44,11 @@ const mutations = {
         }else{
             localStorage.removeItem("cart")
             state.cartList = []
-        }      
+        }
+       
     },
     getGoodsToCartList(state){
-        Object.assign(state.cartList,JSON.parse(localStorage.cart))
+        state.cartList = Object.assign(state.cartList,JSON.parse(localStorage.cart))
     }
 }
 
