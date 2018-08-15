@@ -3,9 +3,6 @@
     <div>
          <van-nav-bar
             title="用户登录"
-            left-text="返回"
-            left-arrow
-            @click-left="goBack"
             />
  
         <div class="register-panel">
@@ -30,6 +27,7 @@
             <div class="register-button">
                 <van-button type="primary" @click="LoginAction" :loading="openLoading" size="large">登录</van-button>
             </div>
+            <a href="" @click.prevent="Register">去注册</a>
        </div>
  
     </div>
@@ -98,7 +96,7 @@
                     }
                 })
                 .catch(error => {
-                    vm.$toast.fail("注册失败" + error);
+                    vm.$toast.fail("登录失败" + error);
                     vm.openLoading = false;
                 });
                         
@@ -119,8 +117,10 @@
                     this.passwordErrorMsg=''
                 }
                 return isOk
-            }       
- 
+            },  
+            Register(){
+                this.$router.push({name:"Register"})
+            }
  
         },
     }
@@ -135,5 +135,8 @@
     }
     .register-button{
         padding-top:10px;
+    }
+    a{
+        font-size: 0.5rem
     }
 </style>
