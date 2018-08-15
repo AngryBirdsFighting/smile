@@ -8,6 +8,7 @@ import CategoryList from '@/components/pages/CategoryList'
 import Cart from '@/components/pages/Cart'
 import Main from '@/components/pages/Main'
 import User from '@/components/pages/User'
+import Address from '@/components/pages/address'
 
 
 Vue.use(Router)
@@ -35,5 +36,6 @@ export default new Router({
     {path: '/register',name: 'Register',component: Register},
     {path: '/login',name: 'Login',component: Login},
     {path: '/Goods',name: 'Goods',component: Goods},
+    {path: '/Address',name: 'Address',component: Address}
   ]
 })
