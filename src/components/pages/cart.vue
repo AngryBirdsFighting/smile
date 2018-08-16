@@ -13,7 +13,6 @@
                 <div class="pang-img"><img :src="item.image" width="100%" /></div>
                 <div class="pang-text">
                     <div class="pang-goods-name">{{item.Name}}</div>
-
                     <div class="pang-control">
                         <van-stepper @plus="editCount(item.goodsId, 1)" @minus="editCount(item.goodsId, 0)" v-model="item.count" />
                     </div>
@@ -28,18 +27,13 @@
                     <div class="allPrice">
                         ￥{{item.price*item.count | moneyFilter}}
                     </div>
-
                 </div>
-
             </div>
         </div>
         <!--显示总金额-->
         <div class="totalMoney">
-
             商品总价：￥ {{total | moneyFilter}}
-
         </div>
-
     </div>
 </template>
 

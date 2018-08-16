@@ -35,6 +35,7 @@
  
 <script>
     import { Toast } from 'vant'
+    import {mapActions} from 'vuex'
     export default {
         data() {
             return {
@@ -51,6 +52,9 @@
             }
         },
         methods: {
+            ...mapActions("user", [
+            "setUser"
+        ]),
             goBack() {
                 this.$router.go(-1)   
             },
@@ -73,19 +77,12 @@
                 })
                 .then(response => {
                     if (response.status == 200) {
-                        if (response.data.success) {
-                            new Promise((resolve,reject)=>{
-                                    localStorage.userInfo={userName:vm.username}
-                                    setTimeout(()=>{
-                                        resolve()
-                                    },500)
-                            }).then(()=>{
+                        if (response.data.data) {
+                            debugger
+                           this.setUser(response.data.data)
                                     Toast.success('登录成功')
                                     vm.$router.push('/')
-                            }).catch(err=>{
-                                    Toast.fail('登录状态保存失败')
-                                    console.log(err)
-                            })
+                           
                         } else {
                             vm.$toast.fail(response.data.message);
                             vm.openLoading = false;

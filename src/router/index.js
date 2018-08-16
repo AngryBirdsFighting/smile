@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store/index'
+import Cookies from 'js-cookie';
 import ShoppingMall from "@/components/pages/ShoppingMall"
 import Register from '@/components/pages/Register'
 import Login from '@/components/pages/Login'
@@ -17,11 +19,10 @@ export default new Router({
   routes: [
     {path: '/',redirect:to => {
       let paths = "";
-      if(!localStorage.userInfo){
-        debugger
+      if(!Cookies.get('userInfo')){      
         paths =  '/login';
       }else{
-        paths = '/main';
+        paths = '/User';
       }
       return paths;
     }},

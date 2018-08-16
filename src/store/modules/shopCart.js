@@ -44,8 +44,7 @@ const mutations = {
         }else{
             localStorage.removeItem("cart")
             state.cartList = []
-        }
-       
+        }     
     },
     getGoodsToCartList(state){
         state.cartList = Object.assign(state.cartList,JSON.parse(localStorage.cart))
