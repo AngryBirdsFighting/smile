@@ -93,6 +93,7 @@
                     }
                 })
                 .catch(error => {
+                    debugger
                     vm.$toast.fail("登录失败" + error);
                     vm.openLoading = false;
                 });
