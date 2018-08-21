@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const BASEURL = "https://www.easy-mock.com/mock/5b573c0e9a5ff532038078dd/smile/"
-const LOCALURL = 'http://1109eb7c.nat123.cc:16783/'
+const LOCALURL = 'http://127.0.0.1:3000'
 var instance = axios.create({
     baseURL: LOCALURL,
-    timeout: 10000,
+    timeout: 4000,
     headers: {'X-Requested-With': 'XMLHttpRequest'},
   });
 
