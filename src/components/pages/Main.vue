@@ -24,7 +24,7 @@
             changeTabbar(active) {
                 switch(active){
                     case 0:
-                        this.$router.push({name:'ShoppingMall'})
+                        this.$router.push({path:'ShoppingMall'})
                         break;
                     case 1:
                         this.$router.push({name:'CategoryList'})

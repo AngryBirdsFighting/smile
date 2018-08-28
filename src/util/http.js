@@ -1,16 +1,22 @@
 import axios from "axios";
 
-const BASEURL = "https://www.easy-mock.com/mock/5b573c0e9a5ff532038078dd/smile/"
+const BASEURL = "https://www.easy-mock.com/mock/5b573c0e9a5ff532038078dd/smile/" // http://127.0.0.1:3000   'http://1109eb7c.nat123.cc:16783'
 const LOCALURL = 'http://127.0.0.1:3000'
 var instance = axios.create({
     baseURL: LOCALURL,
-    timeout: 4000,
+    timeout: 400000000000000000,
     headers: {'X-Requested-With': 'XMLHttpRequest'},
   });
 
   // 添加请求拦截器
 instance.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
+      const token = localStorage.getItem('DON_BLOG_TOKEN');
+      debugger
+      if (token) {
+        // Bearer是JWT的认证头部信息
+        config.headers.common['Authorization'] = token;
+      }
     return config;
   }, function (error) {
     // 对请求错误做些什么
@@ -19,9 +25,11 @@ instance.interceptors.request.use(function (config) {
 
   // 添加响应拦截器
 instance.interceptors.response.use(function (response) {
+  debugger
     // 对响应数据做点什么
     return response;
   }, function (err) {
+    debugger
     switch (err.response.status) {
         case 302:
           err.message = '错误请求：找不到url请求（后台过滤）';
