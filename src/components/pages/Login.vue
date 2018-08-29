@@ -56,7 +56,6 @@ export default {
                     password: vm.password
                 })
                 .then(response => {
-                      debugger
                     if (response.status == 200) {                   
                         if (response.data.success) {
                             this.setUser(response.data.data.user)
@@ -64,18 +63,15 @@ export default {
                             Toast.success("登录成功");
                             vm.$router.push("/");
                         } else {
-                             debugger
                             vm.$toast.fail(response.data.message);
                             vm.openLoading = false;
                         }
                     } else {
-                         debugger
                         vm.$toast.fail("登录失败");
                         vm.openLoading = false;
                     }
                 })
                 .catch(error => {
-                    debugger
                     vm.$toast.fail("登录失败" + error);
                     vm.openLoading = false;
                 });
